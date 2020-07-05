@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="host">http://192.168.56.2/</string>
-    <string name="register">register.php</string>
-    <string name="login">login.php</string>
-    <string name="param_nom">nom</string>
-    <string name="param_prename">prenom</string>
-    <string name="param_mail">mail</string>
-    <string name="param_password">mdp</string>
-    <string name="param_tel">tel</string>
+
+    <string name="server_register">rhmobile/register.php</string>
+    <string name="server_login">rhmobile/login.php</string>
+
+    <string name="user_param_name">nom</string>
+    <string name="user_param_prename">prenom</string>
+    <string name="user_param_mail">mail</string>
+    <string name="user_param_password">mdp</string>
+    <string name="user_param_phone">tel</string>
 </resources>

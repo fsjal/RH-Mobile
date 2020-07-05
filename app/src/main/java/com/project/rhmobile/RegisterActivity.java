@@ -10,6 +10,8 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
+import com.project.rhmobile.dao.Users;
+import com.project.rhmobile.entities.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -43,20 +45,22 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void onConfirm() {
-        if (!checkFields()) {
+        if (checkFields()) {
             processRequest();
         }
     }
 
     private void processRequest() {
-        String url = getString(R.string.host) + getString(R.string.register);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                response -> {
-                    Log.d("toast", "ok");
-                }, error -> {
-                    Log.d("toast", error.getMessage());
-                });
-        requestQueue = Volley.newRequestQueue(this).add(stringRequest);
+        String url = getString(R.string.host) + getString(R.string.server_register);
+        User user = new User(
+                nameText.getText().toString(),
+                prenameText.getText().toString(),
+                emailText.getText().toString(),
+                passwordText.getText().toString(),
+                phoneText.getText().toString());
+
+        Users.add(this, url, user, response -> Log.d("toast", response),
+                error -> Log.e("toast", error.getMessage()));
     }
 
     private boolean checkFields() {
