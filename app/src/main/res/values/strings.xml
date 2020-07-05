@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">RH Mobile</string>
+    <string name="e_mail">E-mail</string>
+    <string name="prenom">Prénom</string>
+    <string name="nom">Nom</string>
+    <string name="password">Mot de passe</string>
+    <string name="phone">Téléphone</string>
+    <string name="confirm">Valider</string>
+    <string name="reset">Vider les champs</string>
+    <string name="sign_in_title">Inscription</string>
+    <string name="logo">logo</string>
+    <string name="login_title">Connexion</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="login">Se connecter</string>
+    <string name="empty_name">Le nom ne peut pas être vide</string>
+    <string name="empty_prename">Le prénom ne peut pas être vide!</string>
+    <string name="empty_email">l\'e-mail ne peut pas être vide!</string>
+    <string name="empty_password">Le mot de passe ne peut pas être vide!</string>
+</resources>
