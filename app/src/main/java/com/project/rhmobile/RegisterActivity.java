@@ -2,12 +2,15 @@ package com.project.rhmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.rhmobile.dao.Users;
@@ -20,7 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText emailText;
     private TextInputEditText passwordText;
     private TextInputEditText phoneText;
-    private Request<String> requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +43,11 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (requestQueue != null) requestQueue.cancel();
+        Volley.newRequestQueue(this).cancelAll(request -> true);
     }
 
     private void onConfirm() {
-        if (checkFields()) {
-            processRequest();
-        }
+        if (checkFields()) processRequest();
     }
 
     private void processRequest() {
@@ -59,16 +59,29 @@ public class RegisterActivity extends AppCompatActivity {
                 passwordText.getText().toString(),
                 phoneText.getText().toString());
 
-        Users.add(this, url, user, response -> Log.d("toast", response),
-                error -> Log.e("toast", error.getMessage()));
+        Users.add(this, url, user, response -> onResponse(response.trim()), this::onError);
+    }
+
+    private void onResponse(String response) {
+        Log.d("toast", response);
+        if (response.equals("true")) {
+            Toast.makeText(this, R.string.user_added, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        Toast.makeText(this, R.string.error_adding_user, Toast.LENGTH_LONG).show();
+    }
+
+    private void onError(VolleyError error) {
+        Log.e("toast", error.getMessage());
     }
 
     private boolean checkFields() {
         return  checkField(nameText, R.string.empty_name) &&
                 checkField(prenameText, R.string.empty_prename) &&
                 checkField(emailText, R.string.empty_email) &&
-                checkField(passwordText, R.string.empty_password);
-
+                checkField(passwordText, R.string.empty_password) &&
+                checkField(phoneText, R.string.empty_phone);
     }
 
     private boolean checkField(TextInputEditText field, int idStr) {

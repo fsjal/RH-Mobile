@@ -16,4 +16,9 @@
     <string name="empty_prename">Le prénom ne peut pas être vide!</string>
     <string name="empty_email">l\'e-mail ne peut pas être vide!</string>
     <string name="empty_password">Le mot de passe ne peut pas être vide!</string>
+    <string name="error_adding_user">Erreur! Utilisateur non ajouté!</string>
+    <string name="user_added">L\'utilisateur a été ajouté avec succès!</string>
+    <string name="login_success">Identification réussie!</string>
+    <string name="empty_phone">Le numéro de téléphone ne peut pas être vide!</string>
+    <string name="user_not_found">Utilisateur non trouvé!</string>
 </resources>
