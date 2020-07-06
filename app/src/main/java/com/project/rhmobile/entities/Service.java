@@ -1,9 +1,13 @@
 package com.project.rhmobile.entities;
 
 public enum Service {
-    Doctor,
     Clinic,
     Hospital,
+    Dispensary,
     Pharmacy,
+    PharmacyDay,
+    PharmacyNight,
+    PharmacyGuard,
+    Doctor,
     Nurse
 }

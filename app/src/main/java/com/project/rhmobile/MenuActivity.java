@@ -39,11 +39,20 @@ public class MenuActivity extends AppCompatActivity {
         RecyclerView menuList = findViewById(R.id.menu_list);
         FloatingActionButton callButton = findViewById(R.id.urgent_call_button);
 
-        menuList.setAdapter(new MenuAdapter(this, getMenuItems(), (position, item) -> {
-
-        }));
+        menuList.setAdapter(new MenuAdapter(this, getMenuItems(), this::onMenuItemClick));
         menuList.setLayoutManager(new LinearLayoutManager(this));
         callButton.setOnClickListener(e -> urgentCall());
+    }
+
+    protected void onMenuItemClick(int position, MenuItem item) {
+        Intent intent;
+        if (item.getService() == Service.Pharmacy) {
+            intent = new Intent(this, PharmacyActivity.class);
+        } else {
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtra("service", item);
+        }
+        startActivity(intent);
     }
 
     @Override
@@ -58,12 +67,13 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    private List<MenuItem> getMenuItems() {
+    protected List<MenuItem> getMenuItems() {
         List<MenuItem> items = new ArrayList<>();
-        items.add(new MenuItem(Service.Clinic, getString(R.string.find_clinic), R.drawable.ic_clinic));
-        items.add(new MenuItem(Service.Doctor, getString(R.string.find_doctor), R.drawable.ic_doctor));
         items.add(new MenuItem(Service.Hospital, getString(R.string.find_hospital), R.drawable.ic_hospital));
+        items.add(new MenuItem(Service.Clinic, getString(R.string.find_clinic), R.drawable.ic_clinic));
+        items.add(new MenuItem(Service.Dispensary, getString(R.string.find_dispensary), R.drawable.ic_dispensary));
         items.add(new MenuItem(Service.Pharmacy, getString(R.string.find_pharmacy), R.drawable.ic_pharmacy));
+        items.add(new MenuItem(Service.Doctor, getString(R.string.find_doctor), R.drawable.ic_doctor));
         items.add(new MenuItem(Service.Nurse, getString(R.string.find_nurse), R.drawable.ic_nurse));
         return items;
     }

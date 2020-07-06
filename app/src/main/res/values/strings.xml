@@ -30,4 +30,8 @@
     <string name="find_hospital">Trouver un hôpital</string>
     <string name="find_pharmacy">Trouver une pharmacie</string>
     <string name="find_nurse">Trouver une infirmière</string>
+    <string name="find_dispensary">Trouver un dispensaire</string>
+    <string name="find_pharmacy_day">Pharmacie de  jour</string>
+    <string name="find_pharmacy_night">Pharmacie de nuit</string>
+    <string name="find_pharmacy_guard">Pharmacie de garde</string>
 </resources>
