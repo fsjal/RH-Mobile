@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.rhmobile.dao.Users;
 import com.project.rhmobile.entities.User;
@@ -30,6 +31,12 @@ public class LoginActivity extends AppCompatActivity {
 
         connect.setOnClickListener(e -> onConnect());
         register.setOnClickListener(e -> onRegister());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Volley.newRequestQueue(this).cancelAll(request -> true);
     }
 
     private void onRegister() {

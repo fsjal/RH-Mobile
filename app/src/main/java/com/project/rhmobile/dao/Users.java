@@ -25,9 +25,9 @@ public class Users {
         DataBase base = new DataBaseDAO();
         Map<String, String> params = new HashMap<>();
 
-        params.put(context.getString(R.string.user_param_name), user.getName());
-        params.put(context.getString(R.string.user_param_prename), user.getPrename());
-        params.put(context.getString(R.string.user_param_mail), user.getEmail());
+        params.put(context.getString(R.string.user_param_last_name), user.getLastName());
+        params.put(context.getString(R.string.user_param_first_name), user.getFirstName());
+        params.put(context.getString(R.string.user_param_email), user.getEmail());
         params.put(context.getString(R.string.user_param_password), user.getPassword());
         params.put(context.getString(R.string.user_param_phone), user.getPhone());
         base.post(Volley.newRequestQueue(context), url, params, listener, error);
@@ -46,7 +46,7 @@ public class Users {
         DataBase base = new DataBaseDAO();
         Map<String, String> params = new HashMap<>();
 
-        params.put(context.getString(R.string.user_param_mail), user.getEmail());
+        params.put(context.getString(R.string.user_param_email), user.getEmail());
         params.put(context.getString(R.string.user_param_password), user.getPassword());
         base.post(Volley.newRequestQueue(context), url, params, listener, error);
     }

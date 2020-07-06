@@ -21,4 +21,13 @@
     <string name="login_success">Identification réussie!</string>
     <string name="empty_phone">Le numéro de téléphone ne peut pas être vide!</string>
     <string name="user_not_found">Utilisateur non trouvé!</string>
+    <string name="location_premission_denied">Localisation refusée par l\'utilisateur!</string>
+    <string name="services_title">Nos Services</string>
+    <string name="find_clinic">Trouver une clinique</string>
+    <string name="urgent_call">Appel d\'urgence</string>
+    <string name="urgent_call_number">tel:190</string>
+    <string name="find_doctor">Trouver un médecin</string>
+    <string name="find_hospital">Trouver un hôpital</string>
+    <string name="find_pharmacy">Trouver une pharmacie</string>
+    <string name="find_nurse">Trouver une infirmière</string>
 </resources>

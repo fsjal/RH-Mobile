@@ -1,0 +1,19 @@
+create table users (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    first_name varchar(50),
+    last_name varchar(50),
+    email varchar(100),
+    password varchar(50),
+    phone varchar(20),
+    INDEX(email),
+    INDEX(password)
+);
+
+create table hospitals (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(50),
+    address varchar(100),
+    phone varchar(20),
+    latitude float,
+    longitude float
+);

@@ -4,10 +4,17 @@
 
     <string name="server_register">rhmobile/register.php</string>
     <string name="server_login">rhmobile/login.php</string>
+    <!--user-->
+    <string name="user_param_last_name">last_name</string>
+    <string name="user_param_first_name">first_name</string>
+    <string name="user_param_email">email</string>
+    <string name="user_param_password">password</string>
+    <string name="user_param_phone">phone</string>
+    <!--hospital-->
+    <string name="hospital_param_name">name</string>
+    <string name="hospital_param_address">address</string>
+    <string name="hospital_param_phone">phone</string>
+    <string name="hospital_param_latitude">latitude</string>
+    <string name="hospital_param_longitude">longitude</string>
 
-    <string name="user_param_name">nom</string>
-    <string name="user_param_prename">prenom</string>
-    <string name="user_param_mail">mail</string>
-    <string name="user_param_password">mdp</string>
-    <string name="user_param_phone">tel</string>
 </resources>
