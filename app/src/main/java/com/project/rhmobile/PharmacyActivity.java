@@ -9,7 +9,7 @@ import com.project.rhmobile.entities.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PharmacyActivity extends MenuActivity {
+public final class PharmacyActivity extends MenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

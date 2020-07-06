@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LogoActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#D4F9DF">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         app:srcCompat="@drawable/ic_logo" />

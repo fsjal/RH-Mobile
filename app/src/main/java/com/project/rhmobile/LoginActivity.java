@@ -15,7 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.project.rhmobile.dao.Users;
 import com.project.rhmobile.entities.User;
 
-public class LoginActivity extends AppCompatActivity {
+public final class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText emailText;
     private TextInputEditText passwordText;

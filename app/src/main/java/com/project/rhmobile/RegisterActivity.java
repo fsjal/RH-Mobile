@@ -14,7 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.project.rhmobile.dao.Users;
 import com.project.rhmobile.entities.User;
 
-public class RegisterActivity extends AppCompatActivity {
+public final class RegisterActivity extends AppCompatActivity {
 
     private TextInputEditText nameText;
     private TextInputEditText prenameText;

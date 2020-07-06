@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public final class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final float DEFAULT_ZOOM = 10;
     private static final int PERMISSIONS_REQUEST_LOCATION = 1000;
