@@ -59,7 +59,7 @@ public final class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
             String[] results = response.split(";");
             User user = new User(Integer.parseInt(results[0]), results[1], results[2], results[3], results[4], results[5]);
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MenuActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
             finish();

@@ -13,6 +13,7 @@ create table hospitals (
     id int PRIMARY KEY AUTO_INCREMENT,
     name varchar(50),
     address varchar(100),
+    image_url varchar(200),
     phone varchar(20),
     latitude float,
     longitude float

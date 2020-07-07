@@ -160,15 +160,12 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
 
     private void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationPermissionGranted = true;
             Log.e("location permission", "we got permission");
         } else {
             ActivityCompat.requestPermissions(this, new String[] {
-                            android.Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
+                            android.Manifest.permission.ACCESS_FINE_LOCATION
                     },
                     PERMISSIONS_REQUEST_LOCATION);
             Log.e("getDeviceLocation", "ask user for permission");

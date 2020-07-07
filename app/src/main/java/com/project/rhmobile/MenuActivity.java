@@ -19,10 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.project.rhmobile.entities.MenuItem;
 import com.project.rhmobile.entities.ServiceType;
+import com.project.rhmobile.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,8 @@ public class MenuActivity extends AppCompatActivity {
         menuList.setAdapter(new MenuAdapter(this, getMenuItems(), this::onMenuItemClick));
         menuList.setLayoutManager(new LinearLayoutManager(this));
         callButton.setOnClickListener(e -> urgentCall());
+        User user = getIntent().getExtras().getParcelable("user");
+        Toast.makeText(this, getText(R.string.welcome) + user.getLastName(), Toast.LENGTH_LONG).show();
     }
 
     protected void onMenuItemClick(int position, MenuItem item) {
