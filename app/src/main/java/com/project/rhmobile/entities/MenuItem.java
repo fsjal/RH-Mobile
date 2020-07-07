@@ -5,18 +5,30 @@ import android.os.Parcelable;
 
 public final class MenuItem implements Parcelable {
 
-    private final Service service;
+    private final ServiceType serviceType;
     private final int image;
     private final String content;
+    private final String title;
+    private final String serverParam;
 
-    public MenuItem(Service service, String content, int image) {
-        this.service = service;
-        this.content = content;
+    public MenuItem(ServiceType serviceType, String title, int image, String content, String serverParam) {
+        this.serviceType = serviceType;
         this.image = image;
+        this.content = content;
+        this.title = title;
+        this.serverParam = serverParam;
     }
 
-    public Service getService() {
-        return service;
+    public String getServerParam() {
+        return serverParam;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public ServiceType getServiceType() {
+        return serviceType;
     }
 
     public int getImage() {
@@ -34,19 +46,23 @@ public final class MenuItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.service == null ? -1 : this.service.ordinal());
+        dest.writeInt(this.serviceType == null ? -1 : this.serviceType.ordinal());
         dest.writeInt(this.image);
         dest.writeString(this.content);
+        dest.writeString(this.title);
+        dest.writeString(this.serverParam);
     }
 
     protected MenuItem(Parcel in) {
-        int tmpService = in.readInt();
-        this.service = tmpService == -1 ? null : Service.values()[tmpService];
+        int tmpServiceType = in.readInt();
+        this.serviceType = tmpServiceType == -1 ? null : ServiceType.values()[tmpServiceType];
         this.image = in.readInt();
         this.content = in.readString();
+        this.title = in.readString();
+        this.serverParam = in.readString();
     }
 
-    public static final Parcelable.Creator<MenuItem> CREATOR = new Parcelable.Creator<MenuItem>() {
+    public static final Creator<MenuItem> CREATOR = new Creator<MenuItem>() {
         @Override
         public MenuItem createFromParcel(Parcel source) {
             return new MenuItem(source);

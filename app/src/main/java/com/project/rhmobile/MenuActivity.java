@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.project.rhmobile.entities.MenuItem;
-import com.project.rhmobile.entities.Service;
+import com.project.rhmobile.entities.ServiceType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class MenuActivity extends AppCompatActivity {
 
     protected void onMenuItemClick(int position, MenuItem item) {
         Intent intent;
-        if (item.getService() == Service.Pharmacy) {
+        if (item.getServiceType() == ServiceType.Pharmacy) {
             intent = new Intent(this, PharmacyActivity.class);
         } else {
             intent = new Intent(this, MainActivity.class);
@@ -69,12 +69,18 @@ public class MenuActivity extends AppCompatActivity {
 
     protected List<MenuItem> getMenuItems() {
         List<MenuItem> items = new ArrayList<>();
-        items.add(new MenuItem(Service.Hospital, getString(R.string.find_hospital), R.drawable.ic_hospital));
-        items.add(new MenuItem(Service.Clinic, getString(R.string.find_clinic), R.drawable.ic_clinic));
-        items.add(new MenuItem(Service.Dispensary, getString(R.string.find_dispensary), R.drawable.ic_dispensary));
-        items.add(new MenuItem(Service.Pharmacy, getString(R.string.find_pharmacy), R.drawable.ic_pharmacy));
-        items.add(new MenuItem(Service.Doctor, getString(R.string.find_doctor), R.drawable.ic_doctor));
-        items.add(new MenuItem(Service.Nurse, getString(R.string.find_nurse), R.drawable.ic_nurse));
+        items.add(new MenuItem(ServiceType.Hospital, getString(R.string.find_hospital), R.drawable.ic_hospital,
+                getString(R.string.service_hospital), getString(R.string.server_hospital_param)));
+        items.add(new MenuItem(ServiceType.Clinic, getString(R.string.find_clinic), R.drawable.ic_clinic,
+                getString(R.string.service_clinic), getString(R.string.server_clinic_param)));
+        items.add(new MenuItem(ServiceType.Dispensary, getString(R.string.find_dispensary), R.drawable.ic_dispensary,
+                getString(R.string.service_dispensary), getString(R.string.server_dispensary_param)));
+        items.add(new MenuItem(ServiceType.Pharmacy, getString(R.string.find_pharmacy), R.drawable.ic_pharmacy,
+                getString(R.string.service_pharmacy), getString(R.string.server_pharmacie_param)));
+        items.add(new MenuItem(ServiceType.Doctor, getString(R.string.find_doctor), R.drawable.ic_doctor,
+                getString(R.string.service_doctor), getString(R.string.server_doctor_param)));
+        items.add(new MenuItem(ServiceType.Nurse, getString(R.string.find_nurse), R.drawable.ic_nurse,
+                getString(R.string.service_nurse), getString(R.string.server_nurse_param)));
         return items;
     }
 

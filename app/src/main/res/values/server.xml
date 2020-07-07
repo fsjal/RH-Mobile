@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--host-->
     <string name="host">http://192.168.56.2/</string>
-
+    <!--pages-->
     <string name="server_register">rhmobile/register.php</string>
     <string name="server_login">rhmobile/login.php</string>
+    <string name="server_services">rhmobile/services.php</string>
     <!--user-->
     <string name="user_param_last_name">last_name</string>
     <string name="user_param_first_name">first_name</string>
     <string name="user_param_email">email</string>
     <string name="user_param_password">password</string>
     <string name="user_param_phone">phone</string>
-    <!--hospital-->
-    <string name="hospital_param_name">name</string>
-    <string name="hospital_param_address">address</string>
-    <string name="hospital_param_phone">phone</string>
-    <string name="hospital_param_latitude">latitude</string>
-    <string name="hospital_param_longitude">longitude</string>
+    <!--service-->
+    <string name="service_param_name">name</string>
+    <string name="service_param_address">address</string>
+    <string name="service_param_phone">phone</string>
+    <string name="service_param_image_url">image_url</string>
+    <string name="service_param_latitude">latitude</string>
+    <string name="service_param_longitude">longitude</string>
 
 </resources>

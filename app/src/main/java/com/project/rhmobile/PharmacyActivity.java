@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.project.rhmobile.entities.MenuItem;
-import com.project.rhmobile.entities.Service;
+import com.project.rhmobile.entities.ServiceType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +26,12 @@ public final class PharmacyActivity extends MenuActivity {
     @Override
     protected List<MenuItem> getMenuItems() {
         List<MenuItem> items = new ArrayList<>();
-        items.add(new MenuItem(Service.PharmacyDay, getString(R.string.find_pharmacy_day), R.drawable.ic_pharmacy_day));
-        items.add(new MenuItem(Service.PharmacyNight, getString(R.string.find_pharmacy_night), R.drawable.ic_pharmacy_night));
-        items.add(new MenuItem(Service.PharmacyGuard, getString(R.string.find_pharmacy_guard), R.drawable.ic_pharmacy_guard));
+        items.add(new MenuItem(ServiceType.PharmacyDay, getString(R.string.service_pharmacy_day), R.drawable.ic_pharmacy_day,
+                getString(R.string.service_pharmacy_day), getString(R.string.server_pharmacie_day_param)));
+        items.add(new MenuItem(ServiceType.PharmacyNight, getString(R.string.service_pharmacy_night), R.drawable.ic_pharmacy_night,
+                getString(R.string.service_pharmacy_night), getString(R.string.server_pharmacie_night_param)));
+        items.add(new MenuItem(ServiceType.PharmacyGuard, getString(R.string.service_pharmacy_guard), R.drawable.ic_pharmacy_guard,
+                getString(R.string.service_pharmacy_guard), getString(R.string.server_pharmacie_guard_param)));
         return items;
     }
 }
