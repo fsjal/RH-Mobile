@@ -19,12 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.project.rhmobile.entities.MenuItem;
 import com.project.rhmobile.entities.ServiceType;
-import com.project.rhmobile.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +41,6 @@ public class MenuActivity extends AppCompatActivity {
         menuList.setAdapter(new MenuAdapter(this, getMenuItems(), this::onMenuItemClick));
         menuList.setLayoutManager(new LinearLayoutManager(this));
         callButton.setOnClickListener(e -> urgentCall());
-        User user = getIntent().getExtras().getParcelable("user");
-        Toast.makeText(this, getText(R.string.welcome) + user.getLastName(), Toast.LENGTH_LONG).show();
     }
 
     protected void onMenuItemClick(int position, MenuItem item) {
@@ -80,7 +75,7 @@ public class MenuActivity extends AppCompatActivity {
         items.add(new MenuItem(ServiceType.Dispensary, getString(R.string.find_dispensary), R.drawable.ic_dispensary,
                 getString(R.string.service_dispensary), getString(R.string.server_dispensary_param)));
         items.add(new MenuItem(ServiceType.Pharmacy, getString(R.string.find_pharmacy), R.drawable.ic_pharmacy,
-                getString(R.string.service_pharmacy), getString(R.string.server_pharmacie_param)));
+                getString(R.string.service_pharmacy), getString(R.string.server_pharmacy_param)));
         items.add(new MenuItem(ServiceType.Doctor, getString(R.string.find_doctor), R.drawable.ic_doctor,
                 getString(R.string.service_doctor), getString(R.string.server_doctor_param)));
         items.add(new MenuItem(ServiceType.Nurse, getString(R.string.find_nurse), R.drawable.ic_nurse,

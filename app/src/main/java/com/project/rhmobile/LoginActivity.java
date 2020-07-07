@@ -56,15 +56,14 @@ public final class LoginActivity extends AppCompatActivity {
     private void onResponse(String response) {
         Log.d("toast", response);
         if (!response.contains("false")) {
-            Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
             String[] results = response.split(";");
             User user = new User(Integer.parseInt(results[0]), results[1], results[2], results[3], results[4], results[5]);
+            Toast.makeText(this, getString(R.string.login_success) + getText(R.string.welcome) + user.getLastName(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MenuActivity.class);
-            intent.putExtra("user", user);
             startActivity(intent);
-            finish();
+        } else {
+            Toast.makeText(this, R.string.user_not_found, Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(this, R.string.user_not_found, Toast.LENGTH_LONG).show();
     }
 
     private void onError(VolleyError error) {

@@ -7,8 +7,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -49,10 +51,12 @@ import static com.project.rhmobile.entities.ServiceType.*;
 public final class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1000;
+    private static final int PERMISSIONS_REQUEST_CALL = 2000;
 
+    private boolean callPermissionGranted;
+    private boolean locationPermissionGranted;
     private FusedLocationProviderClient fusedLocation;
     private GoogleMap map;
-    private boolean locationPermissionGranted;
     private Location lastKnownLocation;
     private List<Service> points = new ArrayList<>();
     private List<Marker> markers = new ArrayList<>();
@@ -60,6 +64,8 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
     private TextView serviceAddressText;
     private TextView servicePhoneText;
     private ImageView serviceImage;
+    private TextView callText;
+    private View callView;
     private BottomSheetBehavior<View> behavior;
 
     @Override
@@ -74,15 +80,28 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
         View sheet = findViewById(R.id.bottom_sheet);
         behavior = BottomSheetBehavior.from(sheet);
         button.setOnClickListener(e -> searchServices());
-        //MenuItem item = getIntent().getExtras().getParcelable("service");
-        MenuItem item = new MenuItem(Hospital, "", 0, "Hôpital", getString(R.string.server_hospital_param));
+        MenuItem item = getIntent().getExtras().getParcelable("service");
         TextView serviceText = findViewById(R.id.service_name_text);
         serviceContentText = findViewById(R.id.service_content_text);
         serviceAddressText = findViewById(R.id.service_address_text);
         servicePhoneText = findViewById(R.id.service_phone_text);
         serviceImage = findViewById(R.id.service_image);
+        callText = findViewById(R.id.service_phone_call_text);
+        callView = findViewById(R.id.service_phone_layout);
         String serviceName = getString(R.string.service) + item.getContent();
         serviceText.setText(serviceName);
+        callText.setOnClickListener(e -> onCall());
+    }
+
+    private void onCall() {
+        if (callPermissionGranted) {
+            Log.d("permission", "0");
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(getString(R.string.tel) + servicePhoneText.getText().toString()));
+            startActivity(intent);
+        } else {
+            getCallPermission();
+        }
     }
 
     private void searchServices() {
@@ -104,14 +123,17 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     private void showServicesByDistance(int distance) {
+        boolean hasMarker = false;
         for (Marker marker : markers) {
             marker.setVisible(false);
             Service service = (Service) marker.getTag();
             if (calculateDistance((float) lastKnownLocation.getLatitude(), (float) lastKnownLocation.getLongitude(),
                     service.getLatitude(), service.getLongitude()) < distance) {
                 marker.setVisible(true);
+                hasMarker = true;
             }
         }
+        if (!hasMarker) Toast.makeText(this, R.string.no_marker, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -124,7 +146,28 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
                 updateLocationUI();
             }
         }
+        callPermissionGranted = false;
+        if (requestCode == PERMISSIONS_REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                callPermissionGranted = true;
+                Log.d("Permission", "2");
+                onCall();
+            }
+        }
     }
+
+    private void getCallPermission() {
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            callPermissionGranted = true;
+            Log.d("Permission", "1");
+            onCall();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
+                    PERMISSIONS_REQUEST_CALL);
+        }
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -145,7 +188,12 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
 
             serviceContentText.setText(content);
             serviceAddressText.setText(address);
-            servicePhoneText.setText(phone);
+            if (phone.trim().isEmpty()) {
+                callView.setVisibility(View.GONE);
+            } else {
+                callView.setVisibility(View.VISIBLE);
+                servicePhoneText.setText(phone);
+            }
             try {
                 Picasso.get().load(service.getImageUrl()).fit()
                         .placeholder(R.drawable.ic_service_image_holder).into(serviceImage);
@@ -256,8 +304,8 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     private void fetchServicePoints() {
-        //MenuItem item = getIntent().getExtras().getParcelable("service");
-        MenuItem item = new MenuItem(Hospital, "", 0, "Hôpital", getString(R.string.server_hospital_param));
+        MenuItem item = getIntent().getExtras().getParcelable("service");
+        //MenuItem item = new MenuItem(Hospital, "", 0, "Hôpital", getString(R.string.server_hospital_param));
         Log.e("service", item.getServiceType().toString());
         String url = getString(R.string.host) + getString(R.string.server_services) + "?service=" + item.getServerParam();
         Log.e("url", url);
@@ -266,6 +314,7 @@ public final class MainActivity extends AppCompatActivity implements OnMapReadyC
 
     private void onError(VolleyError error) {
         if (error.getMessage() != null) Log.e("volley", error.getMessage());
+        Toast.makeText(this, R.string.server_error, Toast.LENGTH_LONG).show();
     }
 
     private void onResponse(String response) {

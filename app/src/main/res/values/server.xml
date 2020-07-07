@@ -19,5 +19,17 @@
     <string name="service_param_image_url">image_url</string>
     <string name="service_param_latitude">latitude</string>
     <string name="service_param_longitude">longitude</string>
+    <!--params-->
+    <string name="server_hospital_param">hospitals</string>
+    <string name="server_clinic_param">clinics</string>
+    <string name="server_dispensary_param">dispensaries</string>
+    <string name="server_pharmacy_param">pharmacies</string>
+    <string name="server_doctor_param">doctors</string>
+    <string name="server_nurse_param">nurses</string>
+    <string name="server_pharmacy_day_param">pharmacies_day</string>
+    <string name="server_pharmacy_night_param">pharmacies_night</string>
+    <string name="server_pharmacy_guard_param">pharmacies_gard</string>
+    <!--misc-->
+    <string name="server_error">Erreur du serveur!</string>
 
 </resources>

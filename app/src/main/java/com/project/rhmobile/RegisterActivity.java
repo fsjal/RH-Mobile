@@ -63,7 +63,7 @@ public final class RegisterActivity extends AppCompatActivity {
 
     private void onResponse(String response) {
         Log.d("toast", response);
-        if (response.equals("true")) {
+        if (response.contains("true")) {
             Toast.makeText(this, R.string.user_added, Toast.LENGTH_LONG).show();
             finish();
             return;
